@@ -122,13 +122,6 @@ mat-icon{
   object-fit: contain;
   transition: all .5s ;
 }
-// .picture-car:hover{
-//   scale: 2.1;
-//   transform:translateY(25px)
-// }
-// .picture-car:hover .grid-item {
-//   background-color: rgba(0, 0, 0, 0);
-// }
 
 .plate{
   height: 40px;
@@ -164,76 +157,3 @@ mat-icon{
   justify-content: center;
   gap: .5rem;
 }
-
-/*Animaciones*/
-
-// .grid-item:hover::before, .grid-item:hover::after {
-//   content: '';
-//   box-sizing: border-box;
-//   position: absolute;
-//   border: 3px solid transparent;
-//   border-radius: 8px;
-//   width: 0;
-//   height: 0;
-// }
-
-// .grid-item:hover::before {
-//   animation: border 2s infinite;
-//   top: 0;
-//   left: 0;
-//   border-top-color: #7DCF00;;
-//   border-right-color: #7DCF00;;
-// }
-// .grid-item:hover::after {
-//   bottom: 0;
-//   right: 0;
-//   animation: border 2s 1s infinite, borderColor 2s 1s infinite;
-// }
-
-/*Definicion de comportamientos de bordes*/
-// @keyframes border {
-//   0% {
-//     width: 0;
-//     height: 0;
-//   }
-//   25% {
-//     width: 100%;
-//     height: 0;
-//   }
-//   50% {
-//     width: 100%;
-//     height: 100%;
-//   }
-//   100% {
-//     width: 100%;
-//     height: 100%;
-//   }
-// }
-
-/*Colores de bordes*/
-// @keyframes borderColor {
-//   0% {
-//     border-bottom-color: #7DCF00;
-//     border-left-color: #7DCF00;
-//   }
-//   50% {
-//     border-bottom-color: #7DCF00;
-//     border-left-color: #7DCF00;
-//   }
-//   51% {
-//     border-bottom-color: transparent;
-//     border-left-color: transparent;
-//   }
-//   100% {
-//     border-bottom-color: transparent;
-//     border-left-color: transparent;
-//   }
-
-
-  
-// }
-
-
-
-
-// End footer

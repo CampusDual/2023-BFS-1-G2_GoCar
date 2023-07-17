@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
     if (localStorageData && localStorageData.session && localStorageData.session.user) {
       this.user = localStorageData.session.user;
     }
-
   }
 
 
