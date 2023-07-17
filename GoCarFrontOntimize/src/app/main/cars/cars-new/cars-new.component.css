@@ -24,4 +24,10 @@
 }
 .row-location{
     margin-top: 10px;
+
+}
+.newMap{
+    border: 2px solid #e91e63;
+     height: 380px;
+      width: 550px ;
 }

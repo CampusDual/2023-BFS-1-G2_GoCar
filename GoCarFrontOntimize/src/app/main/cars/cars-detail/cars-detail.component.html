@@ -44,8 +44,6 @@
 
     </o-column>
 
-
-
     <o-column fxFlex="60%">
       <o-row class="row-location">
         <o-text-input attr="location" label="location" fxFlex="100%" (keyup.enter)="moveMapToLocation()"></o-text-input>
@@ -56,7 +54,7 @@
           fxFlex="50"></o-real-input>
       </o-row>
 
-      <o-row style="border: 2px solid #e91e63; height: 380px; width: 550px;">
+      <o-row class="detailMap">
         <div fxFlex="40" fxFlex="100" *ngIf="hasGPSPositition()">
           <o-map #oMapMarker [center]="getPositionGPS()" zoom="15" min-zoom="3" max-zoom="20" zoom-control="no"
             search-control="no" layer-panel-visible="no" fxFlex (onDrawEvent)="addDrawEvent($event)">
@@ -64,12 +62,6 @@
             <o-map-layer layer-type="marker" layer-id="office_marker" [layer-center]="getPositionGPS()"
               layer-menu-label="My car location" layer-menu-label-secondary="Location"></o-map-layer>
 
-            <o-map-layer layer-type="marker" layer-id="office_marker1" layer-center="42.240599;-8.720727"
-              layer-menu-label="Office headquarters "
-              layer-menu-label-secondary="Location of office headquarters"></o-map-layer>
-            <o-map-layer layer-type="marker" layer-id="office_marker3" layer-center="42.240599;-7.720727"
-              layer-menu-label="Office headquarters "
-              layer-menu-label-secondary="Location of office headquarters"></o-map-layer>
 
           </o-map>
         </div>
@@ -77,17 +69,3 @@
     </o-column>
   </o-row>
 </o-form>
-
-
-<!-- <div fxFlex="40" fxFlex.md="100" *ngIf="hasGPSPositition()">
-  <o-map class="o-map" [center]="getPositionGPS()" zoom="10" min-zoom="3" max-zoom="20" zoom-control="yes"
-    search-control="no" layer-panel-visible="no">
-    <o-map-layer layer-type="marker" layer-id="office_marker" [layer-center]="getPositionGPS()"></o-map-layer> -->
-
-
-
-<!-- <o-map #oMapMarker center="42.940599, -7.120727" zoom="8" min-zoom="3" max-zoom="20"
-zoom-control="yes" search-control="no" layer-panel-visible="no" fxFlex>
-<o-map-layer layer-type="marker" layer-id="office_marker" layer-center="42.240599;-8.720727"
-layer-menu-label="Office headquarters " layer-menu-label-secondary="Location of office headquarters"></o-map-layer>
-</o-map> -->
