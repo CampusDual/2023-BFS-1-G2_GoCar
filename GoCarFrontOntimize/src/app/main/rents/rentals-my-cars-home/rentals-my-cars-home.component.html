@@ -30,7 +30,7 @@
             <div fxFlex> <h3 style="text-align: center;">{{"Distribution of total profit from my cars" | oTranslate }}</h3>
             <o-chart class="chart" type="donutChart"  entity="myCarRentals" service="rents" x-axis="model" y-axis="owner_profit" width="15%" ></o-chart>     
         </div>
-        <div fxFlex> <h3 style="text-align: center;">{{"Mis contribuciones a Gocar " | oTranslate }}</h3>
+        <div fxFlex> <h3 style="text-align: center;">{{"Mis contribuciones a Gocar" | oTranslate }}</h3>
             
 
             <o-chart type="discreteBar" x-label="Axis x" x-axis="month_name" y-axis="total_tax" y-label="Totals" entity="chartTax" service="rents"  width="70%" style="padding-block-start: 20px;"></o-chart>
@@ -38,8 +38,8 @@
   
         </div>
     </div>
-    <div fxLayout="row" fxFlexFill>
-        <div fxFlex> <h3 style="text-align: center;">{{"Mis contribuciones a Gocar II" | oTranslate }}</h3>
+    <!-- <div fxLayout="row" fxFlexFill>
+        <div fxFlex> <h3 style="text-align: center;">{{"Grafica a determinar" | oTranslate }}</h3>
             
             <o-chart type="stackedAreaChart"
             x-label="Month" x-axis="Month" x-data-type="time"
@@ -47,7 +47,7 @@
             entity="chartAllTax" service="rents" 
             width="70%" style="padding-block-start: 20px;"></o-chart>
         </div>
-    </div>
+    </div> -->
 
         </div>
 </o-form-layout-manager>

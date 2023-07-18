@@ -7,6 +7,7 @@
   width: 20rem;
   height: 8rem;
 }
+
 .wrapp-login-logo img {
   width: 100%;
   height: 100%;
@@ -42,7 +43,7 @@
       position: relative;
       z-index: 1;
     }
-   
+
 
     .login-bg-container::before {
       content: "";
@@ -58,7 +59,7 @@
     }
 
     .wrapp-login {
-      
+
       width: 640px;
       min-height: 100%;
 
@@ -119,60 +120,55 @@
 
   }
 
- // Edicion del footer 
-// Start
+  // Edicion del footer 
+  // Start
 
-.footer {
-  position: fixed;
-  color: white;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background-color: #f01c64;
-//background-color:eceff1 (Si queremos que el footer no tenga diff con el color del background de la web)
-  padding: 10px 0;
-  text-align: left;
-  transition: transform 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  z-index: 9999;
-}
+  .footer {
+    position: fixed;
+    color: white;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #f01c64;
+    padding: 10px 0;
+    text-align: left;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 9999;
+  }
 
-.footer-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding-left: 50px;
+  .footer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 50px;
 
-  span {
-    font-size: 14px;
+    span {
+      font-size: 14px;
 
-    a {
-      color: #F1AD2D;
-      text-decoration: none;
+      a {
+        color: #F1AD2D;
+        text-decoration: none;
+      }
     }
   }
-}
 
+  .footer.active {
+    transform: translateY(0);
+  }
 
-
-.footer.active {
-  transform: translateY(0);
-}
-
-.footer-content span.dot {
-  font-size: 1.2em;
-}
-
-
-// End footer
+  .footer-content span.dot {
+    font-size: 1.2em;
+  }
+  // End footer
 
 }
 

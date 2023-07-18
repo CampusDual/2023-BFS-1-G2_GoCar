@@ -25,11 +25,9 @@ export class Combo {
   }, {
     fuelCode: 4,
     fuelText: JSON.parse(localStorage.getItem("com.ontimize.web.ngx.jee.seed"))['lang'] == "es" ? 'Híbrido' : ((JSON.parse(localStorage.getItem("com.ontimize.web.ngx.jee.seed"))['lang'] == "en") ? 'Hybrid': 'Híbrido')
-
   }];
+
 
   public selectedFuelCode = 2;
 
-
-  
 }
