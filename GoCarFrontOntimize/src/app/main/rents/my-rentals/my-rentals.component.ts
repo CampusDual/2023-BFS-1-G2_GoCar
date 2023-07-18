@@ -21,6 +21,8 @@ export class MyRentalsComponent implements OnInit {
 
   constructor(protected injector: Injector) {
   this.rentService = this.injector.get(OntimizeService);
+  this.filteredData = [];
+  this.tableData = [];
   }
 
 ngOnInit() {
@@ -38,10 +40,11 @@ filterData() {
     this.filteredData = this.tableData;
   } else {
     const currentDate = new Date().getTime();
-    this.filteredData = this.tableData.filter(item => item.rental_end_date > currentDate);
-    console.log(this.filterData);
+   
+      this.filteredData = this.tableData.filter(item => item.rental_end_date > currentDate);
+    }
   }
-}
+  
 
 protected configureService() {
   
@@ -69,9 +72,12 @@ protected configureService() {
   
     this.rentService.query(null, columns, entity).subscribe(
       response => {
-        this.tableData = response.data;
-        this.filterData();
-        console.log(this.filteredData);
+        if (response && response.data && Array.isArray(response.data)) {
+          this.tableData = response.data;
+          this.filterData();
+        } else {
+          console.error("Invalid data format in API response.");
+        }
       },
       error => {
         console.error(error);

@@ -37,7 +37,7 @@
       </o-list-item>
     </o-list>
   </main>
-  <div class="empty-data-message" *ngIf="filteredData.length === 0">
+  <div class="empty-data-message" *ngIf="filteredData.length === 0 && tableData.length !== 0">
     <p>{{"There are no rentals pending to enjoy" | oTranslate}}</p>
   </div>
 </o-form-layout-manager>

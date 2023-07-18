@@ -2,7 +2,7 @@
   <o-form-layout-dialog-options title="Alquiler" width="900px" height="750px"
     disable-close="true"></o-form-layout-dialog-options>
 
-  <o-grid (onDataLoaded)="gridInit()" #grid service="cars" entity="availableCars" keys="car_id"
+  <o-grid  #grid service="cars" entity="availableCars" keys="car_id"
     columns="car_id;user_id;brand;model;location;start_date_available;plate;end_date_available;car_photo;daily_rental_price;fuel"
     show-page-size="yes" fxFlex page-size-options="6;12;24;32;64" orderable="yes" sort-column="start_date_available"
     sortable-columns="brand;model;plate;location;daily_rental_price;start_date_available;fuel" attr="gridMyCars"
