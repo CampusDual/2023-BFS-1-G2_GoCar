@@ -1,12 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { OFormComponent } from "ontimize-web-ngx";
-import {
-  AbstractControl,
-  ValidationErrors,
-  ValidatorFn,
-  FormBuilder,
-  FormGroup,
-} from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { CurrentDay } from "../../util/CurrentDay";
 import { BBDD } from "../../util/BBDD";
 import { Moment } from "moment";
@@ -21,7 +15,7 @@ export class HomeDetailComponent implements OnInit {
   @ViewChild("formCar", { static: false }) formCar: OFormComponent;
   @ViewChild("formRent", { static: false }) formRent: OFormComponent;
   dialogForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   car_id: number;
   daysNotAvailable: any[];
@@ -60,7 +54,7 @@ export class HomeDetailComponent implements OnInit {
     this.formRent.insert();
   }
 
-  convertDate(date: Date) {
+  convertDate(date) {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
     let month: string | number = newDate.getMonth() + 1;
@@ -73,7 +67,7 @@ export class HomeDetailComponent implements OnInit {
       day = "0" + day;
     }
 
-    return `${year}-${month}-${day}`;
+    return `${day}-${month}-${year}`;
   }
 
   public currentDay() {
@@ -88,16 +82,21 @@ export class HomeDetailComponent implements OnInit {
   public calculatePrice(event) {
     if (event.type == 0) {
       let priceDay = this.formCar.getFieldValue("daily_rental_price");
-      const startDate = new Date(
-        this.formRent.getFieldValue("rental_start_date")
-      );
-      const endDate = new Date(this.formRent.getFieldValue("rental_end_date"));
-      const days = endDate.getDate() - startDate.getDate();
+      const startDate = this.createDateFromString(this.formRent.getFieldValue("rental_start_date"));
+      const endDate = this.createDateFromString(this.formRent.getFieldValue("rental_end_date"));
+      let days = this.calculateDays(startDate, endDate) || 1;
       let totalPrice = priceDay * days;
       this.formRent.setFieldValue("total_price", totalPrice);
       this.taxGocar(totalPrice);
       this.ownerProfif(totalPrice);
     }
+  }
+
+  calculateDays(startDate: Date, endDate: Date) {
+    const diffInMilliseconds = endDate.getTime() - startDate.getTime();
+    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    return diffInDays;
   }
   public taxGocar(total_price) {
     let tax = total_price * 0.05;
@@ -111,20 +110,32 @@ export class HomeDetailComponent implements OnInit {
 
   public calculateMinDate(event) {
     if (event.type == 0) {
-      let dateReturn = new Date(
-        this.formRent.getFieldValue("rental_start_date")
-      );
-      const year = dateReturn.getFullYear();
-      let month = dateReturn.getMonth() + 1;
-      let incrementDay = dateReturn.getDate() + 1;
-      this.formRent.setFieldValue(
-        "rental_end_date",
-        `${year}-${month}-${incrementDay}`
-      );
-      this.minDateEnd = `${year}-${month}-${incrementDay}`;
+      let selectInStartDate = this.formRent.getFieldValue("rental_start_date");
+      let dateReturn = this.createDateFromString(selectInStartDate);
+      let dateFormatedAddDay = this.addOneDayToDateFormat(dateReturn);
+      this.formRent.setFieldValue("rental_end_date", dateFormatedAddDay);
+      this.minDateEnd = dateFormatedAddDay;
     }
   }
 
+  createDateFromString(date: string) {
+    let dateParts = date.split("/");
+    let day = parseInt(dateParts[0]);
+    let month = parseInt(dateParts[1]);
+    let year = parseInt(dateParts[2]);
+
+    return new Date(year, month, day);
+  }
+
+  addOneDayToDateFormat(date: Date) {
+    const year = date.getFullYear();
+    let month = date.getMonth();
+    let incrementDay = date.getDate() + 1;
+
+    return `${incrementDay}-${month}-${year}`;
+
+
+  }
   calculateMaxDateEnd(event) {
     if (event && event.newValue) {
       const dayStart = new Date(event.newValue);
