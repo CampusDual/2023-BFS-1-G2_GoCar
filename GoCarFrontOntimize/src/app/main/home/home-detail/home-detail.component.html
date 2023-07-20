@@ -86,10 +86,10 @@
 
                   <!-- DATERANGE  -->
         <o-row class="inputRent">
-            <o-date-input attr="rental_start_date"  [min]="currentDay()" [filter-date]="filterAvailability.bind(this)" [max]="convertDate(formCar.getFieldValue('end_date_available'))"  value-type="string"  format="DD/MM/YYYY"  required="yes" (onValueChange)="calculateMinDate($event); calculateMaxDateEnd($event); calculatePrice($event)" ></o-date-input>
+            <o-date-input attr="rental_start_date"  [min]="currentDay()" [filter-date]="filterAvailability.bind(this)" [max]="convertDate(formCar.getFieldValue('end_date_available'))"  value-type="string"  format="YYYY/MM/DD"  required="yes" (onValueChange)="calculateMinDate($event); calculateMaxDateEnd($event); calculatePrice($event)" ></o-date-input>
         </o-row>
         <o-row class="inputRent">
-          <o-date-input attr="rental_end_date" [filter-date]="filterAvailability.bind(this)" [min]="!this.minDateEnd ? currentDay() : this.minDateEnd" [max]="!this.maxDateEnd ? convertDate(formCar.getFieldValue('end_date_available')) : this.maxDateEnd"  value-type="string"   format="DD/MM/YYYY"  required="yes" (onValueChange)="calculatePrice($event)" ></o-date-input>
+          <o-date-input attr="rental_end_date" [filter-date]="filterAvailability.bind(this)" [min]="!this.minDateEnd ? currentDay() : this.minDateEnd" [max]="!this.maxDateEnd ? convertDate(formCar.getFieldValue('end_date_available')) : this.maxDateEnd"  value-type="string"   format="YYYY/MM/DD"  required="yes" (onValueChange)="calculatePrice($event)" ></o-date-input>
         </o-row>
 
                     <!-- TOTAL PRICE -->
