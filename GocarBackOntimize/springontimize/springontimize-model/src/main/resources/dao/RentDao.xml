@@ -40,7 +40,7 @@
             <Sentence>
                 <![CDATA[
                     SELECT
-                        c.car_id ,c.brand, c.model, c.car_photo, r.rent_id ,r.user_rent , r.rental_start_date, r.rental_end_date , r.total_price, r.observations, r.owner_profit
+                        c.car_id ,c.brand, c.model, c.car_photo, r.rent_id ,r.user_rent , r.rental_start_date, r.rental_end_date , r.total_price, r.observations, ROUND(r.owner_profit, 2) AS owner_profit
                     FROM
                         ${mainschema}.tcars c
                         JOIN trents r on c.car_id = r.car_id
