@@ -43,14 +43,9 @@ export class HomeDetailComponent implements OnInit {
   public insertRent() {
     let getIdCar = this.formCar.getFieldValue("car_id");
     this.formRent.setFieldValue("car_id", getIdCar);
-    this.formRent.setFieldValue(
-      "rental_start_date",
-      new Date(this.formRent.getFieldValue("rental_start_date"))
-    );
-    this.formRent.setFieldValue(
-      "rental_end_date",
-      new Date(this.formRent.getFieldValue("rental_end_date"))
-    );
+    
+    this.formRent.setFieldValue("rental_start_date", this.createDateFromString(this.formRent.getFieldValue("rental_start_date")));
+    this.formRent.setFieldValue("rental_end_date", this.createDateFromString(this.formRent.getFieldValue("rental_end_date")));
     this.formRent.insert();
   }
 
@@ -121,15 +116,15 @@ export class HomeDetailComponent implements OnInit {
   createDateFromString(date: string) {
     let dateParts = date.split("/");
     let day = parseInt(dateParts[0]);
-    let month = parseInt(dateParts[1]);
+    let month = parseInt(dateParts[1]) - 1;
     let year = parseInt(dateParts[2]);
-
+    
     return new Date(year, month, day);
   }
 
   addOneDayToDateFormat(date: Date) {
     const year = date.getFullYear();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let incrementDay = date.getDate() + 1;
 
     return `${incrementDay}-${month}-${year}`;
