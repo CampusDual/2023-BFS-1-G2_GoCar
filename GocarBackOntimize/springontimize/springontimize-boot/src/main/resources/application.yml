@@ -63,7 +63,7 @@ server:
 spring:
    datasource:
       driver-class-name: org.postgresql.Driver
-      jdbc-url: jdbc:postgresql://45.84.210.174:65432/2023-BFS-1-G2
+      jdbc-url: jdbc:postgresql://db:5432/2023-BFS-1-G2
       username: Fullstack_2023_1_G2
       password: 1qaz2wsx
       initial-size: 10
