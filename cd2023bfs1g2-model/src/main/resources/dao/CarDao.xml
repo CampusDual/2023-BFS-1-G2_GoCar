@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="tcars"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>car_id</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>car_id</Column>
+    </UpdateKeys>
+    <GeneratedKey>car_id</GeneratedKey>
+    <Queries>
+        <Query id="default">
+            <ValidColumns>
+                <Column>car_id</Column>
+                <Column>brand</Column>
+                <Column>model</Column>
+                <Column>plate</Column>
+                <Column>location</Column>
+                <Column>user_id</Column>
+                <Column>start_date_available</Column>
+                <Column>end_date_available</Column>
+                <Column>car_photo</Column>
+                <Column>daily_rental_price</Column>
+                <Column>longitude</Column>
+                <Column>latitude</Column>
+                <Column>fuel</Column>
+
+
+            </ValidColumns>
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        #COLUMNS#
+                    FROM
+                        ${mainschema}.tcars
+                    #WHERE#
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="available_cars">
+            <ValidColumns>
+                <Column>car_id</Column>
+                <Column>brand</Column>
+                <Column>model</Column>
+                <Column>plate</Column>
+                <Column>location</Column>
+                <Column>user_id</Column>
+                <Column>start_date_available</Column>
+                <Column>end_date_available</Column>
+                <Column>car_photo</Column>
+                <Column>daily_rental_price</Column>
+                <Column>longitude</Column>
+                <Column>latitude</Column>
+                <Column>fuel</Column>
+            </ValidColumns>
+
+            <!--Query returns all the columns with the condition that the current date is between the beginning and the end of the availability-->
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        #COLUMNS#
+                    FROM
+                        ${mainschema}.tcars
+                    #WHERE#
+
+                        and CAST(NOW() AS DATE) between start_date_available and end_date_available
+                ]]>
+            </Sentence>
+        </Query>
+
+    </Queries>
+</JdbcEntitySetup>

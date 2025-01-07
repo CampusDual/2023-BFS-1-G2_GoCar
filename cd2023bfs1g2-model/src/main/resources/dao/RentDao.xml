@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="trents"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>rent_id</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>rent_id</Column>
+    </UpdateKeys>
+    <GeneratedKey>rent_id</GeneratedKey>
+    <Queries>
+        <Query id="default">
+            <ValidColumns>
+                <Column>rent_id</Column>
+                <Column>car_id</Column>
+                <Column>user_rent</Column>
+                <Column>rental_start_date</Column>
+                <Column>rental_end_date</Column>
+                <Column>total_price</Column>
+                <Column>tax_gocar</Column>
+                <Column>owner_profit</Column>
+                <Column>observations</Column>
+
+            </ValidColumns>
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        #COLUMNS#
+                    FROM
+                        ${mainschema}.trents
+                    #WHERE#
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="my_car_rentals">
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        c.car_id ,c.brand, c.model, c.car_photo, r.rent_id ,r.user_rent , r.rental_start_date, r.rental_end_date , r.total_price, r.observations, ROUND(r.owner_profit, 2) AS owner_profit
+                    FROM
+                        ${mainschema}.tcars c
+                        JOIN trents r on c.car_id = r.car_id
+                    #WHERE#
+
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="chart_profit_month">
+            <Sentence>
+                <![CDATA[
+                    SELECT months.month,
+                           to_char(date_trunc('month', to_date(months.month::text, 'MM')), 'Mon') AS month_name,
+                           EXTRACT(YEAR FROM CURRENT_DATE) AS year,
+                           COALESCE(SUM(r.owner_profit), 0) AS total
+                    FROM (
+                      SELECT 1 AS month
+                      UNION SELECT 2 AS month
+                      UNION SELECT 3 AS month
+                      UNION SELECT 4 AS month
+                      UNION SELECT 5 AS month
+                      UNION SELECT 6 AS month
+                      UNION SELECT 7 AS month
+                      UNION SELECT 8 AS month
+                      UNION SELECT 9 AS month
+                      UNION SELECT 10 AS month
+                      UNION SELECT 11 AS month
+                      UNION SELECT 12 AS month
+                    ) AS months
+                    LEFT JOIN (
+                      SELECT EXTRACT(MONTH FROM r.rental_start_date) AS month,
+                             SUM(r.owner_profit) AS owner_profit
+                      FROM tcars c
+                      JOIN trents r ON c.car_id = r.car_id
+                      #WHERE# AND EXTRACT(YEAR FROM r.rental_start_date) = EXTRACT(YEAR FROM CURRENT_DATE)
+                      GROUP BY month
+                    ) AS r ON months.month = r.month
+                    GROUP BY months.month, month_name, year
+                    ORDER BY months.month;
+                ]]>
+            </Sentence>
+
+        </Query>
+        <Query id="myRents">
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        c.car_id ,c.brand, c.model, c.car_photo, r.rent_id ,r.user_rent , r.rental_start_date, r.rental_end_date , r.total_price, r.observations
+                    FROM
+                        ${mainschema}.tcars c
+                        JOIN trents r on c.car_id = r.car_id
+                    #WHERE#
+
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="chart_tax">
+            <Sentence>
+                <![CDATA[
+                    SELECT months.month,
+                           to_char(date_trunc('month', to_date(months.month::text, 'MM')), 'Mon') AS month_name,
+                           EXTRACT(YEAR FROM CURRENT_DATE) AS year,
+
+                           COALESCE(SUM(r.tax_gocar), 0) AS total_tax
+                    FROM (
+                      SELECT 1 AS month
+                      UNION SELECT 2 AS month
+                      UNION SELECT 3 AS month
+                      UNION SELECT 4 AS month
+                      UNION SELECT 5 AS month
+                      UNION SELECT 6 AS month
+                      UNION SELECT 7 AS month
+                      UNION SELECT 8 AS month
+                      UNION SELECT 9 AS month
+                      UNION SELECT 10 AS month
+                      UNION SELECT 11 AS month
+                      UNION SELECT 12 AS month
+                    ) AS months
+                    LEFT JOIN (
+                      SELECT EXTRACT(MONTH FROM r.rental_start_date) AS month,
+
+                             SUM(r.tax_gocar) AS tax_gocar
+                      FROM tcars c
+                      JOIN trents r ON c.car_id = r.car_id
+                      #WHERE# AND EXTRACT(YEAR FROM r.rental_start_date) = EXTRACT(YEAR FROM CURRENT_DATE)
+                      GROUP BY month
+                    ) AS r ON months.month = r.month
+                    GROUP BY months.month, month_name, year
+                    ORDER BY months.month;
+                ]]>
+            </Sentence>
+
+        </Query>
+        <Query id="chart_all_tax">
+            <Sentence>
+                <![CDATA[
+                    SELECT months.month,
+                           to_char(date_trunc('month', to_date(months.month::text, 'MM')), 'Mon') AS month_name,
+                           EXTRACT(YEAR FROM CURRENT_DATE) AS year,
+                           COALESCE(SUM(r.total_price), 0) AS total_total_price,
+                           COALESCE(SUM(r.owner_profit), 0) AS total_profit,
+                           COALESCE(SUM(r.tax_gocar), 0) AS total_tax
+                    FROM (
+                      SELECT 1 AS month
+                      UNION SELECT 2 AS month
+                      UNION SELECT 3 AS month
+                      UNION SELECT 4 AS month
+                      UNION SELECT 5 AS month
+                      UNION SELECT 6 AS month
+                      UNION SELECT 7 AS month
+                      UNION SELECT 8 AS month
+                      UNION SELECT 9 AS month
+                      UNION SELECT 10 AS month
+                      UNION SELECT 11 AS month
+                      UNION SELECT 12 AS month
+                    ) AS months
+                    LEFT JOIN (
+                      SELECT EXTRACT(MONTH FROM r.rental_start_date) AS month,
+                             SUM(r.total_price) AS total_price,
+                             SUM(r.owner_profit) AS owner_profit,
+                             SUM(r.tax_gocar) AS tax_gocar
+                      FROM tcars c
+                      JOIN trents r ON c.car_id = r.car_id
+                      #WHERE# AND EXTRACT(YEAR FROM r.rental_start_date) = EXTRACT(YEAR FROM CURRENT_DATE)
+                      GROUP BY month
+                    ) AS r ON months.month = r.month
+                    GROUP BY months.month, month_name, year
+                    ORDER BY months.month;
+                ]]>
+            </Sentence>
+
+        </Query>
+    </Queries>
+</JdbcEntitySetup>

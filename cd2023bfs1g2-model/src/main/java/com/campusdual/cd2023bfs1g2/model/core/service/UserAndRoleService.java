@@ -58,19 +58,7 @@ public class UserAndRoleService implements IUserAndRoleService {
 	@Override
 	@Secured({ PermissionsProviderSecured.SECURED })
 	public EntityResult userQuery(final Map<?, ?> keysValues, final List<?> attributes) throws OntimizeJEERuntimeException {
-
-		final EntityResult toRet = this.daoHelper.query(this.userDao, keysValues, attributes);
-		if (toRet.containsKey(UserDao.PHOTO)) {
-			final List<Object> photoCustomer = (List<Object>) toRet.get(UserDao.PHOTO);
-			for (int i = 0; i < photoCustomer.size(); i++) {
-				final Object o = photoCustomer.get(i);
-				if (o instanceof BytesBlock) {
-					photoCustomer.set(i, ((BytesBlock) o).getBytes());
-				}
-			}
-		}
-
-		return toRet;
+		return null;
 	}
 
 	/*
@@ -254,23 +242,7 @@ public class UserAndRoleService implements IUserAndRoleService {
 	@Transactional(rollbackFor = Throwable.class)
 	public EntityResult rolesForUserUpdate(final Map<?, ?> attributesValues, final Map<?, ?> keysValues)
 			throws OntimizeJEERuntimeException {
-		try {
-			if ("S".equals(attributesValues.get(UserRoleDao.ACTIVED))) {
-				// insert
-				final Map<String, Object> valuesToInsert = new HashMap<>();
-				valuesToInsert.put(UserRoleDao.USR_ID, keysValues.get(UserRoleDao.USR_ID));
-				valuesToInsert.put(UserRoleDao.ROL_ID, keysValues.get(UserRoleDao.ROL_ID));
-				return this.daoHelper.insert(this.userRolesDao, valuesToInsert);
-			} else if (keysValues.get(UserRoleDao.URO_ID) != null) {
-				// delete
-				final Map<String, Object> valuesToDelete = new HashMap<>();
-				valuesToDelete.put(UserRoleDao.URO_ID, keysValues.get(UserRoleDao.URO_ID));
-				return this.daoHelper.delete(this.userRolesDao, valuesToDelete);
-			}
-			return new EntityResultMapImpl();
-		} finally {
-			this.invalidateSecurityManager();
-		}
+		return null;
 	}
 
 	@Override
@@ -304,23 +276,7 @@ public class UserAndRoleService implements IUserAndRoleService {
 	@Override
 	public EntityResult passwordUpdate(final Map<?, ?> attributesValues, final Map<?, ?> keysValues)
 			throws OntimizeJEERuntimeException {
-		final UserInformation userInfo = (UserInformation) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		final Map<String, Object> kvq = new HashMap<>();
-		kvq.put(UserDao.LOGIN, userInfo.getUsername());
-		final EntityResult oldPassword = this.daoHelper.query(userDao, kvq, List.of(UserDao.USR_ID, UserDao.PASSWORD));
-		final Map<String, Object> r = oldPassword.getRecordValues(0);
-		if (this.checkPasswords((String) r.get(UserDao.PASSWORD), (String) attributesValues.get(UserDao.OLD_PASSWORD))) {
-			final Map<String, Object> newPassword = new HashMap<>();
-			newPassword.put(UserDao.PASSWORD, this.encryptPassword((String) attributesValues.get(UserDao.NEW_PASSWORD)));
-			final Map<String, Object> kvu = new HashMap<>();
-			kvu.put(UserDao.USR_ID, r.get(UserDao.USR_ID));
-			return this.daoHelper.update(userDao, newPassword, kvu);
-		} else {
-			final EntityResult error = new EntityResultMapImpl();
-			error.setCode(EntityResult.OPERATION_WRONG);
-			error.setMessage("The old password isn't correct!");
-			return error;
-		}
+		return null;
 	}
 
 	/*
@@ -328,21 +284,7 @@ public class UserAndRoleService implements IUserAndRoleService {
 	 */
 	@Override
 	public EntityResult profileQuery(final Map<?, ?> keysValues, final List<?> attributes) throws OntimizeJEERuntimeException {
-		final UserInformation userInfo = (UserInformation) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		final Map<String, Object> kv = new HashMap<>();
-		kv.put(UserDao.LOGIN, userInfo.getUsername());
-		final EntityResult toRet = this.daoHelper.query(this.userDao, kv, attributes);
-		if (toRet.containsKey(UserDao.PHOTO)) {
-			final List<Object> photoCustomer = (List<Object>) toRet.get(UserDao.PHOTO);
-			for (int i = 0; i < photoCustomer.size(); i++) {
-				final Object o = photoCustomer.get(i);
-				if (o instanceof BytesBlock) {
-					photoCustomer.set(i, ((BytesBlock) o).getBytes());
-				}
-			}
-		}
-
-		return toRet;
+		return null;
 	}
 
 	/*
@@ -351,17 +293,7 @@ public class UserAndRoleService implements IUserAndRoleService {
 	@Override
 	@Transactional(rollbackFor = Throwable.class)
 	public EntityResult profileUpdate(final Map<?, ?> attributesValues, final Map<?, ?> keysValues) throws OntimizeJEERuntimeException {
-		try {
-			final UserInformation userInfo = (UserInformation) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			final Map<String, Object> kvq = new HashMap<>();
-			kvq.put(UserDao.LOGIN, userInfo.getUsername());
-			final EntityResult er = this.daoHelper.query(this.userDao, kvq, List.of(UserDao.USR_ID));
-			final Map<String, Object> kvu = new HashMap<>();
-			kvu.put(UserDao.USR_ID, er.getRecordValues(0).get(UserDao.USR_ID));
-			return this.daoHelper.update(this.userDao, this.encryptPassword(attributesValues), kvu);
-		} finally {
-			this.invalidateSecurityManager();
-		}
+		return null;
 	}
 
 	@Override

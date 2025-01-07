@@ -2,6 +2,7 @@ package com.campusdual.cd2023bfs1g2.ws.core.rest;
 
 import java.util.HashMap;
 
+import com.campusdual.cd2023bfs1g2.openapi.core.service.IPermissionsApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campusdual.cd2023bfs1g2.api.core.service.IUserAndRoleService;
 import com.campusdual.cd2023bfs1g2.model.core.dao.RoleDao;
-import com.campusdual.cd2023bfs1g2.openapi.core.service.IPermissionsApi;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.dto.EntityResultMapImpl;
 
