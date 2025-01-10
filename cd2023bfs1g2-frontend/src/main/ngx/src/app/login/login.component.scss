@@ -2,6 +2,19 @@
   margin-top: 24px;
 }
 
+.wrapp-login-logo {
+  padding: .5rem;
+  width: 20rem;
+  height: 8rem;
+}
+
+.wrapp-login-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}
+
 .full-page {
   width: 100%;
   height: 100%;
@@ -22,7 +35,7 @@
     overflow: auto;
 
     .login-bg-container {
-      background-image: url('^assets/images/login_bg.png');
+      background-image: url('^assets/images/car_login.jpg');
       width: calc(100% - 640px);
       background-repeat: no-repeat;
       background-size: cover;
@@ -30,6 +43,7 @@
       position: relative;
       z-index: 1;
     }
+
 
     .login-bg-container::before {
       content: "";
@@ -45,6 +59,7 @@
     }
 
     .wrapp-login {
+
       width: 640px;
       min-height: 100%;
 
@@ -105,28 +120,58 @@
 
   }
 
-  .footer-container {
-    position: absolute;
-    left: 0;
-    right: 0;
+  // Edicion del footer 
+  // Start
+
+  .footer {
+    position: fixed;
+    color: white;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: 40px;
-    z-index: 2;
-
-    div {
-      height: 40px;
-      margin-right: 138px;
-
-      span {
-        font-size: 11px;
-        padding-right: 4px;
-      }
-    }
-
+    height: 30px;
+    background-color: #f01c64;
+    padding: 10px 0;
+    text-align: left;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 9999;
   }
 
+  .footer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 50px;
+
+    span {
+      font-size: 14px;
+
+      a {
+        color: #F1AD2D;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .footer.active {
+    transform: translateY(0);
+  }
+
+  .footer-content span.dot {
+    font-size: 1.2em;
+  }
+  // End footer
+
 }
+
 @media(max-width:576px) {
   .full-page {
     .login-outer-container {

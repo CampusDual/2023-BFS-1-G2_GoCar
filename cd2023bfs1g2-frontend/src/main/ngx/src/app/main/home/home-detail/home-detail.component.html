@@ -1,0 +1,141 @@
+<!-- FORM CAR -->
+<o-form #formCar (onDataLoaded)="formInit()" mode="dialog" class="cars-detail" service="cars" entity="car" keys="car_id"
+  message-service-type="customMessageServiceTypeCar" keys-sql-types="INTEGER" header-actions="U;D" show-header="no">
+  <div class="form">
+
+    <!-- CAR ID -->
+    <o-row>
+      <o-text-input class="input-padding" attr="car_id" fxFlex required="yes" enabled oHidden></o-text-input>
+    </o-row>
+
+    <!-- BRAND -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-text-input class="input-padding" attr="brand" fxFlex required="yes" enabled></o-text-input>
+    </o-row>
+
+    <!-- MODEL -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-text-input class="input-padding" attr="model" fxFlex required="yes" enabled></o-text-input>
+    </o-row>
+
+    <!-- FUEL -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-text-input class="input-padding" attr="fuel" fxFlex required="yes" enabled></o-text-input>
+    </o-row>
+    <!-- USER -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-text-input class="input-padding" attr="user_id" fxFlex required="yes" enabled></o-text-input>
+    </o-row>
+    <!-- LOCATION -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-text-input class="input-padding" attr="location" fxFlex required="yes" enabled></o-text-input>
+    </o-row>
+
+    <!-- PRICE PER DAY -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-currency-input attr="daily_rental_price" label="Price_per_day" min="1" max="100" required="yes"
+        enabled></o-currency-input>
+    </o-row>
+
+    <!-- END DATE AVAILABLE -->
+    <o-row class="cars-new-principal-row-column-info-row">
+      <o-date-input class="input-padding" attr="end_date_available" fxFlex required="yes" enable></o-date-input>
+    </o-row>
+    <div class="columnscontainer">
+      <o-column class="leftColumn" fxFlex="65%" style="height: 500px">
+        <!-- PHOTO CAR -->
+        <div class="row-car_photo">
+          <o-image attr="car_photo" title="car_photo" orderable="no" searchable="no" type="image" avatar="yes"
+            show-controls="no" read-only="yes" image-type="base64"></o-image>
+        </div>
+        <div class="cars-new-principal-row-column-info">
+          <h2>{{ 'Información relativa' | oTranslate }}</h2>
+          <div>
+            <span>{{formCar.getFieldValue('brand')}} - {{formCar.getFieldValue('model')}}</span>
+          </div>
+          <div>
+            <span><mat-icon>local_gas_station</mat-icon>{{formCar.getFieldValue('fuel')}}</span>
+          </div>
+          <div>
+            <span>{{formCar.getFieldValue('daily_rental_price')}}<mat-icon>euro</mat-icon>/{{ 'day' | oTranslate
+              }}</span>
+          </div>
+          <div>
+            <span><mat-icon>person_outline</mat-icon>{{formCar.getFieldValue('user_id')}} </span>
+          </div>
+          <div>
+            <span><mat-icon>place</mat-icon>{{formCar.getFieldValue('location')}}</span>
+          </div>
+
+          <!-- <div>
+          <span>{{ 'until' | oTranslate }} {{convertDate(formCar.getFieldValue('end_date_available'))}}</span>
+        </div> -->
+
+        </div>
+
+      </o-column>
+      <o-column class="rightColumn" fxFlex="35%">
+        <h2>{{ 'Formaliza tu alquiler' | oTranslate }}</h2>
+        <div class="cars-new-principal-row-column-requireInputs">
+
+          <!-- FORM RENT -->
+          <o-form #formRent service="rents" entity="rent" keys="rent_id" keys-sql-types="INTEGER"
+            message-service-type="customMessageServiceTypeRent" header-actions="I" show-header="no">
+
+            <!-- CAR ID HIDDEN -->
+            <o-row>
+              <o-text-input attr="car_id" oHidden></o-text-input>
+            </o-row>
+
+            <!-- DATERANGE  -->
+            <o-row class="inputRent">
+              <o-date-input attr="rental_start_date" [min]="currentDay()" [filter-date]="filterAvailability.bind(this)"
+                [max]="convertDate(formCar.getFieldValue('end_date_available'))" value-type="string" format="DD/MM/YYYY"
+                required="yes"
+                (onValueChange)="calculateMinDate($event); calculateMaxDateEnd($event); calculatePrice($event)"></o-date-input>
+            </o-row>
+            <o-row class="inputRent">
+              <o-date-input attr="rental_end_date" [filter-date]="filterAvailability.bind(this)"
+                [min]="!this.minDateEnd ? currentDay() : this.minDateEnd"
+                [max]="!this.maxDateEnd ? convertDate(formCar.getFieldValue('end_date_available')) : this.maxDateEnd"
+                value-type="string" format="DD/MM/YYYY" required="yes"
+                (onValueChange)="calculatePrice($event)"></o-date-input>
+            </o-row>
+
+            <!-- TOTAL PRICE -->
+            <o-row class="totalprice">
+              <o-currency-input attr="total_price" label="total_price" required="yes" enabled
+                class="totalprice-amount"></o-currency-input>
+            </o-row>
+
+            <o-row class="tax_gocar">
+              <o-currency-input attr="tax_gocar" label="tax_gocar" required="yes" enabled oHidden></o-currency-input>
+            </o-row>
+            <o-row class="owner_profit">
+              <o-currency-input attr="owner_profit" label="owner_profit" required="yes" enabled
+                oHidden></o-currency-input>
+            </o-row>
+
+
+            <!-- OBSERVATIONS -->
+            <o-row class="observations">
+              <o-textarea-input attr="observations" label="observations" required="no"
+                read-only="no"></o-textarea-input>
+            </o-row>
+
+            <!-- BUTTON INSERT  -->
+          </o-form>
+        </div>
+      </o-column>
+    </div>
+    <div class="containerbutton">
+
+
+      <o-button attr="basic1" type="STROKED" label="RENT" layout-padding color="primary"
+        (click)="insertRent()"></o-button>
+
+
+
+    </div>
+  </div>
+</o-form>

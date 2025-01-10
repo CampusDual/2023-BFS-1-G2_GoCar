@@ -1,0 +1,19 @@
+.custom-header{
+    text-align: center;    
+}
+
+.ontimize-buttons{
+    margin: 0 auto;
+}
+
+.login-form {
+    display: flex;
+    align-items: center;
+}
+.login-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+

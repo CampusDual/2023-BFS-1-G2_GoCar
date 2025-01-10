@@ -1,0 +1,50 @@
+<o-form-layout-manager mode="dialog" title="" label-columns="name" attr="o-form-layout-branches-home" color="warn">
+
+  <o-form-layout-dialog-options label-columns="brand;model" title="My car" width="1200px" height="720px"
+    disable-close="true"></o-form-layout-dialog-options>
+
+  <main class="main">
+
+    <o-list #list service="cars" entity="myCar" keys="car_id"
+      columns="car_id;user_id;brand;model;location;start_date_available;plate;end_date_available;car_photo;daily_rental_price;fuel"
+      show-page-size="yes" fxFlex paginations-controls="yes" quick-filter-columns="brand;model;location"
+      insert-button="yes" insert-button-position="top" delete-button="no" selectable="no" orderable="yes"
+      sort-columns="brand;model;plate;location;fuel" class="list">
+
+      <o-list-item *ngFor="let list of list.dataArray" class="list-item">
+
+        <header class="list-item-header">
+          <div class="list-item-header-div">
+            <h2>{{ list.brand }}</h2>
+          </div>
+        </header>
+
+        <div class="list-picture" *ngIf="list.car_photo">
+          <o-image attr="car_photo" title="car_photo" [data]="list.car_photo" orderable="no" enabled="false"
+            searchable="no" type="image" avatar="yes" image-type="base64" show-controls="no" read-only="yes"></o-image>
+
+        </div>
+        <main class="list-item-body">
+          <div class="plate">
+            <h4>{{ list.model }}</h4>
+            <span> <mat-icon>money</mat-icon> {{ list.plate }} </span>
+          </div>
+          <div class="fuel">
+            <span> <mat-icon>local_gas_station</mat-icon> {{ list.fuel }} </span>
+          </div>
+          <div class="location">
+            <mat-icon>place</mat-icon><span> {{ list.location }}</span>
+          </div>
+          <div class="price">
+            <mat-icon>€_simbol</mat-icon><span> {{ list.daily_rental_price }}</span>
+          </div>
+
+          <div class="start_date_available">
+            <span> <mat-icon>access_time</mat-icon>{{ convertDate(list.start_date_available) }} - {{
+              convertDate(list.end_date_available) }}</span>
+          </div>
+        </main>
+      </o-list-item>
+    </o-list>
+  </main>
+</o-form-layout-manager>

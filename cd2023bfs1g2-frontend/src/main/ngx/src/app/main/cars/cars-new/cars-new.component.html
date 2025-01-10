@@ -1,0 +1,65 @@
+<o-form #form (onDataLoaded)="centerMapLocation()" mode="dialog" class="cars-new"
+  message-service-type="customMessageServiceTypeCar" service="cars" entity="myCar" keys="car_id"
+  keys-sql-types="INTEGER" header-actions="U;D" show-header="yes">
+
+  <o-row>
+    <o-column class="leftColumn" fxFlex="20%">
+      <o-row>
+        <o-combo class="input-padding" attr="brand" service="cars_brands" entity="brand" fxFlex="100%"
+          value-column="brand_name" columns="brand_name" visible-columns="brand_name"></o-combo>
+      </o-row>
+      <o-row>
+        <o-text-input class="input-padding" attr="model" fxFlex="100%" required="yes"></o-text-input>
+      </o-row>
+      <o-row>
+        <o-text-input class="input-padding" attr="plate" fxFlex="100%" required="yes" placeholder="1234ABC"
+          [validators]="validatorsConfirmPlateArray">
+          <o-validator error-name="plateNotFormat" error-text="Invalid registration format"></o-validator>
+        </o-text-input>
+      </o-row>
+
+      <!-- FUEL -->
+      <o-row>
+        <o-combo class="input-padding" attr="fuel" [static-data]="combo.fuelsArray" [data]="combo.selectedFuelCode"
+          value-column="fuelText" columns="fuelCode;fuelText" visible-columns="fuelText" required="yes"
+          fxFlex></o-combo>
+
+      </o-row>
+
+      <!-- PRICE PER DAY -->
+
+      <o-row>
+
+        <o-currency-input class="input-padding" attr="daily_rental_price" label="Price_per_day" fxFlex="100%" min="1"
+          max="100" required="yes"></o-currency-input>
+      </o-row>
+
+      <o-row>
+        <div class="nota"><span>{{"* Gocar obtendrá un 5% por gastos de gestión" | oTranslate }}</span></div>
+      </o-row>
+      <o-row>
+        <o-daterange-input class="input-padding" attr="daterange" label="date_range" fxFlex="100%" [min]="currentDay()"
+          format="DD/MM/YYYY" required="yes"></o-daterange-input>
+      </o-row>
+    </o-column>
+    <o-column class="leftColumn" fxFlex="30%">
+      <o-image class="photoCar" attr="car_photo" title="car_photo" avatar="yes" image-type="base64" show-controls="yes"
+        read-only="no"></o-image>
+    </o-column>
+    <o-column fxFlex="50%">
+      <o-row class="row-location">
+        <o-text-input attr="location" label="location" fxFlex="100%" (keyup.enter)="moveMapToLocation()"></o-text-input>
+        <o-real-input oHidden attr="longitude" decimal-separator="," max-decimal-digits="10" min-decimal-digits="0"
+          class="input-padding" fxFlex="50"></o-real-input>
+        <o-real-input oHidden attr="latitude" decimal-separator="," max-decimal-digits="10" min-decimal-digits="0"
+          fxFlex="50"></o-real-input>
+      </o-row>
+
+      <o-map class="mapNewCar" #oMapMarker zoom="12" min-zoom="3" max-zoom="20" zoom-control="no" search-control="false"
+        search-control-button-visible="false" layer-panel-visible="no" fxFlex (onDrawEvent)="addDrawEvent($event)">
+        <o-map-draw-controls></o-map-draw-controls>
+      </o-map>
+
+    </o-column>
+  </o-row>
+</o-form>

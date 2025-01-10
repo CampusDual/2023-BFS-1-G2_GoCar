@@ -1,4 +1,20 @@
-<o-app-layout show-language-selector="no">
-  <o-user-info-configuration show-profile="yes"> </o-user-info-configuration>
+<o-app-layout show-language-selector="yes">
+  <o-app-layout-header>
+    <img class="logo" src="assets/images/Logo_GoCar-foto.png" />
+
+  </o-app-layout-header>
+
   <router-outlet></router-outlet>
+  <footer class="footer">
+    <div class="footer-content">
+      <span>© 2023 GoCarSpain, Inc.</span>
+      <!-- Lo de abajo queda comentado hasta que se pueda poner la funcionalidad de la privacidad y los terminos de la app-->
+      <!-- <span class="dot">&#183;</span>
+      <span><a href="#">Privacy</a></span>
+      <span class="dot">&#183;</span>
+      <span><a href="#">Terms</a></span>
+      <span class="dot">&#183;</span>
+      <span><a href="#">Your Privacy Choices</a></span> -->
+    </div>
+  </footer>
 </o-app-layout>

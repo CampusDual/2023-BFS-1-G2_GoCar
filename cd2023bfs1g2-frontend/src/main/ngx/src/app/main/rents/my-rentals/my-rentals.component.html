@@ -1,0 +1,43 @@
+<o-form-layout-manager mode="dialog" title="" label-columns="name" attr="o-form-layout-branches-home" color="warn">
+
+  <o-form-layout-dialog-options title="Car" width="800px" height="600px"
+    disable-close="true"></o-form-layout-dialog-options>
+
+  <main class="main">
+    <o-list #list service="rents" entity="myRents" keys="rent_id"
+      columns="rent_id;car_id;brand;model;car_photo;user_rent;rental_start_date;rental_end_date;total_price;observations"
+      show-page-size="yes" fxFlex paginations-controls="yes" quick-filter="false" insert-button="no" delete-button="no"
+      selectable="no" orderable="yes" sort-columns="brand;model" class="list">
+
+      <o-button class="btn-showOldRents" #showOldRents o-list-toolbar position="start"
+        [label]="showOldRentals ? 'Hide old rentals' : 'Show old rentals'" (onClick)="showHideOldRentals()"></o-button>
+      <o-list-item class="list-item" *ngFor="let list of filteredData">
+        <header class="list-item-header">
+          <div class="list-item-header-div">
+            <h2>{{ list.brand }}</h2>
+          </div>
+        </header>
+
+        <div class="list-photo" *ngIf="list.car_photo">
+          <o-image attr="car_photo" title="car_photo" [data]="list.car_photo" orderable="no" enabled="false"
+            searchable="no" type="image" auto-fit="no" image-type="base64" show-controls="no" read-only="yes"></o-image>
+
+        </div>
+        <main class="list-item-body">
+          <div class="price">
+            <mat-icon>€_simbol</mat-icon><span> {{ list.total_price }}</span>
+          </div>
+
+          <div class="start_date_available">
+            <span> <mat-icon>access_time</mat-icon>{{ convertDate(list.rental_start_date) }} - {{
+              convertDate(list.rental_end_date) }}</span>
+          </div>
+        </main>
+
+      </o-list-item>
+    </o-list>
+  </main>
+  <div class="empty-data-message" *ngIf="filteredData.length === 0 && tableData.length !== 0">
+    <p>{{"There are no rentals pending to enjoy" | oTranslate}}</p>
+  </div>
+</o-form-layout-manager>

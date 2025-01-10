@@ -1,3 +1,159 @@
-.bg {
-  background-color: darkred;
+
+button{ 
+  color: #F1AD2D;
+}
+
+.home{
+  display: flex;
+  justify-content: center;
+  // margin-top: 100px;
+  // margin-bottom: 50px;
+  color: #F1AD2D;
+}
+
+.home{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.main-container-title {
+  top:0px;
+  margin-top: 30px;
+  height: 100px;
+  position: absolute;
+  height: 50px;
+  align-items: center;
+  display: flex;
+}
+
+.grid{
+  display: flex;
+  border: 2px solid green;
+}
+
+.main-container-title h1 {
+  text-shadow: 2px 2px 2px gray;
+  font-size: 70px;
+  color: #fff;
+  font-weight: bold;
+  float: left;
+  position: relative;
+}
+
+.main-container-title h1 span {
+  background-color: #eceff1;
+  position: absolute;
+  right: 0;
+  width: 0;
+  border-left: 1px solid  transparent;
+  animation: move 3s infinite alternate;
+}
+
+@keyframes move {
+
+from {
+  width: 100%;
+}
+to {
+  width: 0;
+}
+
+}
+
+.grid-item{
+  background: #fff;
+  text-align: center;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  transition: all .8s ease;
+  justify-content: space-around;
+  border-radius: 8px;
+}
+
+.grid-item:hover{
+  scale: 1.05;  
+}
+
+.grid-item-body:hover .start_date_available {
+  border-top: 2px solid #F1AD2D;
+}
+
+mat-icon{
+  color: #F1AD2D;
+}
+
+.grid-item-header{ 
+  margin-top: .6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  color:#e91e63;
+}
+.grid-item-header-div{
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  width: fit-content;
+  align-items: center;
+  display: flex;
+  height: 1.6rem;
+}
+
+.location {
+  display: flex;
+  gap: .4rem;
+}
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-picture {  
+  height: 100px;
+  display: flex;
+  pointer-events: none;
+}
+.picture-car{
+  padding: 0;
+  width: 100%;
+  object-fit: contain;
+  transition: all .5s ;
+}
+
+.plate{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.plate span {
+  display: flex;
+  gap: .3rem; 
+}
+
+.grid-item-body{
+  margin: 10px 8px;
+  width: 300px;
+  color: #e91e63;
+  font-weight: bold;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.start_date_available{
+  border-top: 2px solid #FFE0A5;
+  height: 15px;
+  padding: .5rem;
+}
+.start_date_available span {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
 }

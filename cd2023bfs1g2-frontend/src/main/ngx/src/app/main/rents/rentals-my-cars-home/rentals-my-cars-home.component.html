@@ -1,0 +1,53 @@
+
+<o-form-layout-manager attr="formLayoutMngr" mode="tab" title="Rents my cars" separator=",">
+
+    <h2 style="padding-block-start: 50px;">{{"Your profit for month" | oTranslate }}</h2>
+    <o-chart type="discreteBar" x-label="Month" y-label="Totals" service="rents" entity="chartProfitMonth" x-axis="month_name" y-axis="total" rightAlignYAxis="true" width="90%" ></o-chart>
+    
+
+    <o-table  attr="rents" service="rents" entity="myCarRentals" title="RENTS MY CARS"
+    columns="rent_id;car_id;brand;model;user_rent;rental_start_date;rental_end_date;total_price;owner_profit"
+    visible-columns="brand;model;user_rent;rental_start_date;rental_end_date;total_price;owner_profit"
+    sort-columns="[DES]rental_start_date" keys="rent_id" query-rows="5" quick-filter="yes" delete-button="no" insert-button="no">
+    
+        <o-table-column class="font-table" class="column" title="car_photo" attr="car_photo" orderable="no" searchable="no" type="image"
+            image-type="base64" avatar="yes" >
+        </o-table-column>
+        <o-table-column class="column" attr="brand" title="brand"></o-table-column>
+        <o-table-column class="column" attr="user_rent" title="user_rent"></o-table-column>
+        <o-table-column class="column" attr="rental_start_date" title="rental_start_date" type="date" format="DD/MM/YYYY"></o-table-column>
+        <o-table-column class="column" attr="rental_end_date" title="rental_end_date" type="date" format="DD/MM/YYYY"></o-table-column>
+        <o-table-column class="column" attr="total_price" title="total_price"></o-table-column>
+        <o-table-column class="column" attr="owner_profit" title="owner_profit"></o-table-column>
+
+
+        <o-table-column class="column" attr="observations" title="observations"></o-table-column>
+
+    </o-table>
+    <div class="chart" layout="column" fxFlex>
+
+        <div fxLayout="row" fxFlexFill>
+            <div fxFlex> <h3 style="text-align: center;">{{"Distribution of total profit from my cars" | oTranslate }}</h3>
+            <o-chart class="chart" type="donutChart"  entity="myCarRentals" service="rents" x-axis="model" y-axis="owner_profit" width="15%" ></o-chart>     
+        </div>
+        <div fxFlex> <h3 style="text-align: center;">{{"Mis contribuciones a Gocar" | oTranslate }}</h3>
+            
+
+            <o-chart type="discreteBar" x-label="Axis x" x-axis="month_name" y-axis="total_tax" y-label="Totals" entity="chartTax" service="rents"  width="70%" style="padding-block-start: 20px;"></o-chart>
+
+  
+        </div>
+    </div>
+    <!-- <div fxLayout="row" fxFlexFill>
+        <div fxFlex> <h3 style="text-align: center;">{{"Grafica a determinar" | oTranslate }}</h3>
+            
+            <o-chart type="stackedAreaChart"
+            x-label="Month" x-axis="Month" x-data-type="time"
+            y-axis="total_tax;total_profit;total_total_price" y-label="total_total_price" 
+            entity="chartAllTax" service="rents" 
+            width="70%" style="padding-block-start: 20px;"></o-chart>
+        </div>
+    </div> -->
+
+        </div>
+</o-form-layout-manager>

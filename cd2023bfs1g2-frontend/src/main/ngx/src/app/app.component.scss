@@ -1,0 +1,14 @@
+/* You can add app styles to this file */
+.header-image {
+    width: 10rem;
+    height: 3rem;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    left: 250px;   
+}
+.header-image img {
+    width: 80%;
+    object-fit: contain;
+}

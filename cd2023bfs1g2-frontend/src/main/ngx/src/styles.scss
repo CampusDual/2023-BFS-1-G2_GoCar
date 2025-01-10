@@ -1,40 +1,108 @@
 /* You can add global styles to this file, and also import other style files */
-.o-form-layout-manager {
-  .o-form {
-    form {
-      height: 100%;
-    }
-  }
+
+.input-padding-error * {
+  color: #f00;
 }
 
-/* Form toolbar background color */
-.o-form-toolbar .o-form-toolbar-header.mat-toolbar {
+
+.mat-drawer-container{
+  
+}
+
+.mat-dialog-container  {
+  border-radius: 30px;
+  transition: all .5s ease;
   background-color: transparent;
+  border-radius: 8px;
+  box-shadow: none;
+ background-color: white;
+  // box-shadow: 5px 5px 15px #fff ;
+}
+
+.ng-star-inserted {
+ 
+  font-weight: bold;
+  // color: #e91e63;
+}
+.mat-form-field-wrapper {
+  border:none;
+}
+.mat-icon {
+  color: #F1AD2D;
+}
+.title-container {
+  font-weight: bold;
+  background-color: transparent;
+  box-shadow: 1px 1px 15px inset #fff;
+  outline: none;
+  padding: 0;
+}
+// .form-layout-dialog-container {
+//   border: 2px solid red;
+//   border-radius: 8px;
+// }
+
+.o-grid-sort>mat-form-field {
+  width: 400px !important;
+  text-align: center;
+}
+.o-grid-paginator > mat-form-field{
+  text-align: center;
 }
 
 
-.o-column > div.o-container .o-container-scroll.o-container-gap,
-.o-row > div.o-container .o-container-scroll.o-container-gap {
-  padding: 15px;
+// .o-app-header.o-app-header-medium+.header-layout{
+//   top: -65px !important;
+// }
+
+.o-form-toolbar .mat-toolbar {
+  box-shadow: none;
+  background-color: white;
+  
+ 
 }
 
-.avatar.o-image {
-  width: 200px;
-  height: 200px;
+.o-form-toolbar{
+  margin: 0 auto;
+  margin-top: 38px;
+}
 
-  .o-image-content.o-image-auto-fit {
-    .o-image-display-container {
-      img {
-        border-radius: 50%;
-        aspect-ratio: auto 200/200;
-        width: 200px;
-        height: 200px;
-      }
-    }
+// .mat-form-field-wrapper{
+//   color: #e91e63;
+// }
 
-    .o-image-form-field {
-      position: absolute;
-      bottom: -42px;
-    }
-  }
+.o-grid-toolbar.o-data-toolbar.ng-star-inserted * {
+  color: #e91e63 !important;
+  // background-color: #e91e63 !important;
+
+}
+
+.o-table .o-table-container .mat-table.medium tr.mat-row {
+  height: 60px !important;
+}
+
+.o-table {
+  height: 90% !important;
+  margin-top: 50px;
+}
+
+.o-table .o-table-container .mat-table.medium tr.mat-header-row:not(.o-table-insertable) .mat-header-cell {
+  font-size: 16px !important;
+}
+
+.o-table .o-table-container .mat-table.medium tr.mat-row .mat-cell {
+  font-size: 16px !important;
+}
+
+
+.list-photo .o-image .o-image-content .o-image-display-container > img {
+  border-radius: 50px;  
+}
+
+.list-picture .o-image .o-image-content .o-image-display-container > img {
+  border-radius: 20px;  
+}
+
+button.mat-icon-button {
+  border-radius: 50%;
 }

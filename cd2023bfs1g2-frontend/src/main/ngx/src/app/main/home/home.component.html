@@ -1,5 +1,48 @@
-<div fxLayout="row" layout-padding fxLayoutAlign="center center">
-  <p>
-    Ontimize web seed application home component
-  </p>
-</div>
+<o-form-layout-manager mode="dialog" title="" label-columns="name" attr="o-form-layout-branches-home" color="warn">
+  <o-form-layout-dialog-options title="Alquiler" width="900px" height="750px"
+    disable-close="true"></o-form-layout-dialog-options>
+
+  <o-grid  #grid service="cars" entity="availableCars" keys="car_id"
+    columns="car_id;user_id;brand;model;location;start_date_available;plate;end_date_available;car_photo;daily_rental_price;fuel"
+    show-page-size="yes" fxFlex page-size-options="6;12;24;32;64" orderable="yes" sort-column="start_date_available"
+    sortable-columns="brand;model;plate;location;daily_rental_price;start_date_available;fuel" attr="gridMyCars"
+    class="main-grid">
+
+    <o-button class="btn-showOldRents" #showOldRents o-grid-toolbar position="start"
+    label="Show in map" (onClick)="openMap()"></o-button>
+    
+    <div *ngIf="show">
+    <o-grid-item *ngFor="let list of grid.dataArray" class="grid">
+      <o-column class="grid-item">
+        <header class="grid-item-header">
+          <div class="grid-item-header-div">
+            <h2>{{ list.brand }}</h2>
+          </div>
+        </header>
+
+        <div class="grid-picture" *ngIf="list.car_photo">
+          <o-image class="picture-car" attr="car_photo" title="car_photo" [data]="list.car_photo" orderable="no"
+            searchable="no" avatar="yes" image-type="base64" show-controls="no" read-only="yes"
+            height="150px"></o-image>
+        </div>
+
+        <main class="grid-item-body">
+          <div class="plate">
+            <h4>{{ list.model }}</h4>
+            <span> <mat-icon>money</mat-icon> {{ list.plate }} </span>
+          </div>
+          <div class="fuel">
+            <span> <mat-icon>local_gas_station</mat-icon> {{ list.fuel }} </span>
+         </div>
+          <div class="location">
+            <mat-icon>place</mat-icon><span> {{ proba(list.location) }}</span>
+          </div>
+          <div class="price">
+            <span>{{ list.daily_rental_price }}</span><mat-icon>euro</mat-icon>
+          </div>
+        </main>
+      </o-column>
+    </o-grid-item>
+  </div>
+  </o-grid>
+</o-form-layout-manager>

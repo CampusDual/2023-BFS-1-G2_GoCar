@@ -1,0 +1,34 @@
+.cars-new {
+    display: flex;
+    height: 100%;
+    flex-direction: column-reverse;
+
+}
+
+.leftColumn {
+    margin-right: 30px;
+    height: 100%;
+    gap: 20px;
+}
+
+.photoCar {
+    margin-top: 10px;
+    height: 85%;
+}
+
+.input-padding {
+    margin-top: 10px;
+}
+
+.row-location {
+    margin-top: 10px;
+}
+
+.nota{
+    color:#e91e63;
+}
+.mapNewCar{
+    border: 3px solid #e91e63; 
+    height: 380px; 
+    width: 550px;
+}

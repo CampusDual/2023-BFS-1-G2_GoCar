@@ -1,0 +1,67 @@
+<o-form #form (onDataLoaded)="formInit()" mode="dialog" class="cars-detail"
+  message-service-type="customMessageServiceTypeCar" service="cars" entity="car" keys="car_id" keys-sql-types="INTEGER"
+  header-actions="U;D" show-header="yes">
+
+  <o-row>
+
+
+    <o-column class="firstColumn" fxFlex="20%">
+
+      <o-integer-input oHidden attr="car_id" required="yes"></o-integer-input>
+
+      <o-combo attr="brand" service="cars_brands" entity="brand" value-column="brand_name" columns="brand_name"
+        visible-columns="brand_name"></o-combo>
+
+      <o-text-input class="input-padding" attr="model" fxFlex="100%" required="yes"></o-text-input>
+
+      <o-text-input class="input-padding" attr="plate" fxFlex="100%" required="yes" placeholder="1234ABC"
+        [validators]="validatorsConfirmPlateArray">
+
+
+        <o-validator error-name="plateNotFormat" error-text="Invalid registration format"></o-validator>
+
+      </o-text-input>
+
+      <o-combo class="input-padding" attr="fuel" [static-data]="combo.fuelsArray" [data]="combo.selectedFuelCode"
+        value-column="fuelText" columns="fuelCode;fuelText" visible-columns="fuelText" required="no" fxFlex></o-combo>
+
+      <o-currency-input class="input-padding" attr="daily_rental_price" label="Price_per_day" min="1" max="100"
+        required="yes"></o-currency-input>
+
+      <o-date-input value-type="date" class="input-padding" label="start_date_available" attr="start_date_available"
+        format="DD/MM/YYYY" fxFlex="100%" required="no"></o-date-input>
+      <o-date-input label="end_date_available" attr="end_date_available" fxFlex="100%" required="no"></o-date-input>
+    </o-column>
+
+    <o-column class="leftColumn" fxFlex="30%">
+
+      <o-image attr="car_photo" title="car_photo" orderable="no" searchable="no" type="image" avatar="yes"
+        image-type="base64"></o-image>
+
+    </o-column>
+
+    <o-column fxFlex="60%">
+      <o-row class="row-location">
+        <o-text-input attr="location" label="location" fxFlex="100%" (keyup.enter)="moveMapToLocation()"></o-text-input>
+
+        <o-real-input oHidden attr="longitude" decimal-separator="," max-decimal-digits="10" min-decimal-digits="0"
+          class="input-padding" fxFlex="50"></o-real-input>
+        <o-real-input oHidden attr="latitude" decimal-separator="," max-decimal-digits="10" min-decimal-digits="0"
+          fxFlex="50"></o-real-input>
+      </o-row>
+
+      <o-row class="mapDetailCar">
+        <div fxFlex="40" fxFlex="100" *ngIf="hasGPSPositition()">
+          <o-map #oMapMarker [center]="getPositionGPS()" zoom="15" min-zoom="3" max-zoom="20" zoom-control="no"
+            search-control="no" layer-panel-visible="no" search-control-button-visible="false" fxFlex
+            (onDrawEvent)="addDrawEvent($event)">
+
+            <o-map-draw-controls></o-map-draw-controls>
+            <o-map-layer layer-type="marker" layer-id="office_marker" [layer-center]="getPositionGPS()"
+              layer-menu-label="My car location" layer-menu-label-secondary="Location"></o-map-layer>
+          </o-map>
+        </div>
+      </o-row>
+    </o-column>
+  </o-row>
+</o-form>

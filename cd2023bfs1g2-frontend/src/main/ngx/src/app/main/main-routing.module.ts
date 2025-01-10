@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from 'ontimize-web-ngx';
 
 import { MainComponent } from './main.component';
-import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -13,9 +12,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-      { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-      { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+      { path: 'cars', loadChildren: () => import('./cars/cars.module').then(m => m.CarsModule) },
+      { path: 'rents', loadChildren: () => import('./rents/rents.module').then(m => m.RentsModule) },
     ]
   }
 ];

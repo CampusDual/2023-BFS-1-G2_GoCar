@@ -1,0 +1,63 @@
+.logo{
+    width: 130px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+// Edicion del footer 
+// Start
+
+.footer {
+    position: fixed;
+    color: #111;
+    font-weight: bold;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #f8bbd0;
+  //background-color:eceff1 (Si queremos que el footer no tenga diff con el color del background de la web)
+    padding: 10px 0;
+    text-align: left;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 9999;
+  }
+  
+  .footer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 50px;
+  
+    span {
+      font-size: 14px;
+  
+      a {
+        color: #F1AD2D;
+        text-decoration: none;
+      }
+    }
+  }
+  
+  
+  
+  .footer.active {
+    transform: translateY(0);
+  }
+  
+  .footer-content span.dot {
+    font-size: 1.2em;
+  }
+  
+  
+  // End footer
+  
+

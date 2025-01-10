@@ -1,14 +1,16 @@
 <div class="full-page">
   <div class="login-outer-container">
-
     <div class="login-bg-container">
     </div>
-
     <div class="wrapp-login">
+      
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container">
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="wrapp-login-logo">
+          <img src='assets/images/Logo_GoCar-foto.png'>
+        </div>
 
-          <div class="login-title-container" fxLayout="column">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+         <div class="login-title-container" fxLayout="column">
             <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
             <span class="title_text">{{ 'LOGIN_TITLE' | oTranslate }}:</span>
           </div>
@@ -20,6 +22,7 @@
                 {{ 'ERROR_USER_REQUIRED' | oTranslate }}
               </mat-error>
             </mat-form-field>
+
             <mat-form-field fxFill class="m-top-24">
               <input matInput class="mat-input" #password placeholder="{{ 'PASSWORD' | oTranslate }}" id="password" type="password"
                 [formControl]="pwdCtrl">
@@ -31,22 +34,23 @@
 
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="m-top-24">
             <mat-checkbox class="text">{{ 'REMEMBER_ME' | oTranslate }}</mat-checkbox>
-            <!-- <span class="text link_text">{{ 'FORGOT_PWD' | oTranslate }}</span> -->
           </div>
 
           <button mat-raised-button color="primary" type="submit">{{ 'LOGIN' | oTranslate }}</button>
+          <div layout-padding></div>
+          <div layout-padding></div>
+          <button type="button" (click)="openRegisterUser()" >{{ 'REGISTER' | oTranslate }}</button>
         </form>
+        
       </div>
-
     </div>
   </div>
 
-  <div id="footer" class="footer-container">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <span>{{ 'FOOTER_CREATED_BY' | oTranslate }}</span>
-      <span> &copy; 2021 </span>
-      <span>{{ 'FOOTER_RIGHTS' | oTranslate }}</span>
+  <footer class="footer">
+    <div class="footer-content">
+      <span>© 2023 GoCarSpain, Inc.</span>
     </div>
-  </div>
-
+  </footer>
+  
+  
 </div>

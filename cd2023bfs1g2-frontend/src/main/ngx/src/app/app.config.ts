@@ -6,18 +6,22 @@ import { SERVICE_CONFIG } from './shared/app.services.config';
 
 export const CONFIG: Config = {
   // The base path of the URL used by app services.
-  apiEndpoint:  (window['__env'] !== undefined) ? window['__env']['apiUrl'] : environment.apiEndpoint,
+  //apiEndpoint: 'https://try.imatia.com/ontimizeweb/services/qsallcomponents-jee/services/rest',
+  apiEndpoint: (window['__env'] !== undefined) ? window['__env']['apiUrl'] : environment.apiEndpoint,
 
+  // bundle: {
+  //   path: 'bundle'
+  // },
   // Application identifier. Is the unique package identifier of the app.
   // It is used when storing or managing temporal data related with the app.
   // By default is set as 'ontimize-web-uuid'.
-  uuid: 'com.campusdual.cd2023bfs1g2',
+  uuid: 'com.ontimize.web.ngx.jee.seed',
 
   // Title of the app
   title: 'JEE seed',
 
-  // Language of the application.
-  locale: 'en',
+  //  Language of the application.
+  locale: 'es',
 
   // The service type used (Ontimize REST standart, Ontimize REST JEE
   // or custom implementation) in the whole application.
@@ -28,14 +32,9 @@ export const CONFIG: Config = {
 
   appMenuConfiguration: MENU_CONFIG,
 
-  applicationLocales: ['es', 'en'],
-
-  permissionsServiceType: 'OntimizeEEPermissions' /* Optional, OntimizeEEPermissions is the default value */,
-  permissionsConfiguration: {
-    service: 'permissions',
-  },
+  applicationLocales: ['es', 'en', 'gl'],
 
   exportConfiguration: {
-    path:'/export'
- }
+    path: '/export'
+  }
 };
